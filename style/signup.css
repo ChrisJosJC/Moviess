@@ -1,0 +1,54 @@
+@import url("standard.css");
+
+body{
+   justify-items: end;
+}
+
+.entries{
+    box-sizing: border-box;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+}
+
+form{
+    background-color: #333a;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    place-items: center;
+}
+
+input, select{
+    height: 30px;
+    outline: none;
+    border-radius: 5px;
+    background-color: #222e;
+    border: none;
+    font-family: montserrat;
+    caret-color: #3e72e0;
+    color: white;
+    box-sizing: border-box;
+    padding: 5px;
+}
+
+hr{
+    color: white;
+    margin: 0;
+    margin-bottom: 10px;
+}
+#send{
+    background-color: #3e72e0;
+    height: 40px;
+    font-weight: 600;
+    color: white;
+    font-size: 1em;
+}
+
+label{
+    opacity: .5;
+}
