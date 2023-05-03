@@ -1,8 +1,9 @@
 <?php
-include('./connection.php');
+include('./config/connection.php');
 $ID = $_GET["id"];
 $movie = $con->query("SELECT pelicula.`ID`,
 pelicula.`nombre`,
+pelicula.`sinopsis`,
 pelicula.`duracion`,
 pelicula.`ano`,
 pelicula.`imagen`,
@@ -29,17 +30,24 @@ $movie = $movie->fetch_assoc();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style/catalogo.css">
     <link rel="stylesheet" href="./style/style.css">
-    <title>Save you movies</title>
+    <link rel="shortcut icon" href="./public/favicon.svg" type="image/x-icon">
+    <title>Blune - Save you movies</title>
 </head>
 
 <body>
-    <?php include("./includes/header.php") ?>
+    <?php include("./includes/header.php");
+    if (!isset($_SESSION["username"])&&$_SESSION["rol"]!==1) {
+        header("location:index.php");
+    }  ?>
     <div class="upload">
-        <h1>Peliculas</h1>
+        <h1>Editar pelicula de <i style="color: #222"><?php echo $movie['nombre'] ?></i></h1>
         <form action="./crud/update.php" method="post" id="form" enctype="multipart/form-data">
             <input type="number" name="ID" hidden value="<?php echo $movie['ID'] ?>">
             <label for="title">Titulo / Nombre
                 <input value="<?php echo $movie['nombre'] ?>" placeholder="Titulo de la pelicula" type="text" id="title" name="title"></label>
+                <label for="description">Sinopsis
+                <textarea placeholder="Sinopsis de la pelicula" type="text" id="description" name="description"><?php echo $movie['sinopsis'] ?></textarea>
+            </label>
             <label for="genero">Genero</label>
             <select name="genero" id="genero">
                 <?php

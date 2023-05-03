@@ -7,15 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style/verify.css">
     <link rel="stylesheet" href="./style/catalogo.css">
-    <title>Catalogo</title>
+    <link rel="shortcut icon" href="./public/favicon.svg" type="image/x-icon">
+    <title>Blune - Pelicula</title>
 </head>
 <?php
-include("./connection.php");
+include("./config/connection.php");
 include("./includes/header.php");
+if (!isset($_SESSION["username"])&&$_SESSION["rol"]!==1) {
+    header("location:index.php");
+} 
 if ($dataPeli->num_rows > 0) {
     while ($row = $dataPeli->fetch_assoc()) {
         $ID = $row["ID"];
         $nombre = $row["nombre"];
+        $sinopsis = $row["sinopsis"];
         $duracion = $row["duracion"];
         $director = $row["director"];
         $productora = $row["productora"];
@@ -26,17 +31,17 @@ if ($dataPeli->num_rows > 0) {
         if ($ID == $_GET["id"]) {
 ?>
             <article class="article">
-                <img loading="lazy" src="./<?php echo $imagen ?>" alt="Banner de $nombre">
+                <img loading="lazy" src="./<?php echo $imagen ?>" alt="Banner de <?php echo $nombre ?>">
                 <div>
                     <hr>
                     <h2><?php echo $nombre . " - " . $ano ?></h2>
                     <div class="data">
+                        <p><?php echo $sinopsis ?></p>
                         <h3>Director: <?php echo $director ?></h3>
                         <h3>Productor: <?php echo $productora ?></h3>
                         <h3>Duracion: <?php echo $duracion ?></h3>
-                        <h3>Genero: <?php echo $genero ?></h3>
                     </div>
-                    <a href="./Rick Rolled.mp4" class="button bad">Ver</a>
+                    <a href="./public/Rick Rolled.mp4" class="button bad">Reproducir</a>
                 </div>
             </article>
 <?php
@@ -46,6 +51,7 @@ if ($dataPeli->num_rows > 0) {
     echo "Esta pelicula no existe chico!";
 }
 ?>
+
 <style>
     .article {
         display: grid;

@@ -7,17 +7,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style/verify.css">
     <link rel="stylesheet" href="./style/catalogo.css">
-    <script src="./script/script.js" defer></script>
-    <title>Catalogo</title>
+    <script defer src="./script/script.js" defer></script>
+    <link rel="shortcut icon" href="./public/favicon.svg" type="image/x-icon">
+    <script defer src="./script/filter.js" defer></script>
+    <title>Blune - Catalogo de Peliculas</title>
 </head>
-<?php include("./includes/header.php") ?>
-<section class="peliculas">
+<?php 
+include("./config/connection.php");
+include("./includes/header.php");
+if (!isset($_SESSION["username"])&&$_SESSION["rol"]!==1) {
+    header("location:index.php");
+} 
+?>
+
+<section class="dashboard">
+<input value="" type="text" class="search-bar" placeholder="Buscar pelicula">        
+<div class="peliculas-cards">
     <?php
-    include("./connection.php");
     if ($dataPeli->num_rows > 0) {
         while ($row = $dataPeli->fetch_assoc()) {
             $ID = $row["ID"];
             $nombre = $row["nombre"];
+            $descripcion = $row["sinopsis"];
             $duracion = $row["duracion"];
             $director = $row["director"];
             $productora = $row["productora"];
@@ -28,14 +39,16 @@
             <article class=" article">
                 <img loading="lazy" src="<?php echo $imagen ?>" alt="Banner de $nombre">
                 <div class="data">
-                    <h2><?php echo $nombre ?></h2>
-                    <h3><?php echo $director ?></h3>
-                    <h3><?php echo $productora ?></h3>
-                    <h3>Duracion: <?php echo $duracion ?></h3>
+                    <h2><?php echo $nombre. " - ". $ano ?></h2>
+                    <p><?php echo $descripcion ?></p>
+                    <h3>Genero: <?php echo $genero; ?></h3>
+                    <h3>Director/a: <?php echo $director; ?></h3>
+                    <h3>Productor/a: <?php echo $productora; ?></h3>
+                    <h3>Duracion: <?php echo $duracion; ?> horas</h3>
                 </div>
                 <div class="btn-actions">
-                    <a href="./pelicula.php?id=<?php echo $ID ?>" class="button bad">Ver más</a>
-                    <a href="./editar-pelicula.php?id=<?php echo $ID ?>" class=""><img loading="lazy" id="pencil" src="./public/pencil.svg" width="30px"></a>
+                    <a href="./pelicula_admin.php?id=<?php echo $ID; ?>" class="button bad">Ver más</a>
+                    <a href="./editar-pelicula.php?id=<?php echo $ID; ?>" class=""><img loading="lazy" id="pencil" src="./public/pencil.svg" width="30px"></a>
                     <img class="trash" loading="lazy" src="./public/trash.svg" data-href="./crud/delete.php?id=<?php echo $ID ?>">
                 </div>
             </article>
@@ -45,6 +58,7 @@
         echo "No hay peliculas almacenadas";
     }
     ?>
+</div>
 </section>
 <div class="popup">
     <div class="card">
@@ -59,9 +73,3 @@
 </body>
 
 </html>
-
-<?php
-if (is_null($_SESSION["username"])) {
-    header("location:./index.php");
-}
-?>

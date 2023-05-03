@@ -1,0 +1,16 @@
+
+Error: Call to undefined function imagecreatefromjpeg() in C:\xampp\htdocs\Blune\crud\upload.php:10
+Stack trace:
+#0 C:\xampp\htdocs\Blune\crud\upload.php(54): compress('C:\\xampp\\tmp\\ph...', 'uploads/backgro...', 75)
+#1 C:\xampp\htdocs\Blune\crud\update.php(3): include('C:\\xampp\\htdocs...')
+#2 {main}
+Error: Call to undefined function imagecreatefromjpeg() in C:\xampp\htdocs\Blune\crud\upload.php:10
+Stack trace:
+#0 C:\xampp\htdocs\Blune\crud\upload.php(54): compress('C:\\xampp\\tmp\\ph...', 'uploads/backgro...', 75)
+#1 C:\xampp\htdocs\Blune\crud\update.php(3): include('C:\\xampp\\htdocs...')
+#2 {main}
+Error: Call to undefined function imagecreatefromjpeg() in C:\xampp\htdocs\Blune\crud\upload.php:10
+Stack trace:
+#0 C:\xampp\htdocs\Blune\crud\upload.php(54): compress('C:\\xampp\\tmp\\ph...', 'uploads/backgro...', 75)
+#1 C:\xampp\htdocs\Blune\crud\update.php(3): include('C:\\xampp\\htdocs...')
+#2 {main}

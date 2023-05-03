@@ -12,7 +12,7 @@
 <body>
     <article class="nice verified">
         <h1>Los datos de la pelicula se han guardado correctamente!</h1>
-        <a class="button nice" href="../index.php">Ir al catalogo</a>
+        <a class="button nice" href="../dashboard.php">Ir al catalogo</a>
     </article>
 </body>
 
